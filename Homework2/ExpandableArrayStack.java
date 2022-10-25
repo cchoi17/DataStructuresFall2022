@@ -1,60 +1,47 @@
 import java.util.NoSuchElementException;
 
 public class ExpandableArrayStack implements Stack{
-    private Object[] s;
-    private Object[] newS;
+    private static int MINIMUM_CAPACITY = 16; 
+    private Object[] elements =  new Object[MINIMUM_CAPACITY];
     private int size = 0;
-    private int cap = 16; 
 
     public int capacity(){
-        return s.length; 
+        return elements.length; 
     }
 
     public void push(Object item){
         if(isFull()){
-            doubleSize(); 
-            throw new NoSuchElementException("This stack is full!"); 
-        }
-        else if((cap>16) && (size < 0.25*cap)) {
-            halfSize(); 
-        }
-        s[size++] =item; 
+            changeCapacity(elements.length*2); 
+        } 
+        elements[size++] =item;
     }
 
     public Object pop(){
         var head = peek(); 
-        s[--size]=null; 
+        elements[--size]=null; 
+        if((elements.length > MINIMUM_CAPACITY) && (size < (0.25 * elements.length))) {
+            changeCapacity(elements.length/2); 
+        }
         return head; 
     }
     public Object peek(){
         if(isEmpty()){
             throw new NoSuchElementException("This stack is empty!");
         }
-        return s[size-1]; 
+        return elements[size-1]; 
     } 
     public int size(){
         return size; 
     }
 
-    public void doubleSize(){
-        // currently look at s. 1. make a brand new array whose size is twice s.link 2. copy all 
-        //s one at a time with a for loopsystem.array copy move them into the new array
-        // make array point to the new array
-        cap = 2 * cap; 
-        for(int i = 0; i < s.length; i++){
-            System.arraycopy(s, 0, newS, 0,cap);  
-        }
-    }
-
-    public void halfSize(){
-        cap = cap/2; 
-        for(int i = 0; i <s.length; i++){
-            System.arraycopy(s, 0, newS, 0, cap); 
-        }
+    public void changeCapacity(int newSize){
+        Object[] elements2 = new Object[newSize]; 
+        System.arraycopy(elements, 0, elements, 0, elements.length);  
+        elements = elements2; 
     }
     
     public boolean isFull() {
-        return size == s.length;
+        return size == elements.length;
     }
 
     @Override

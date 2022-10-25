@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/christinachoi/Downloads/junit-platform-console-standalone-1.9.0.jar",
+        "editor.defaultFormatter", "esbenp.prettier-vscode"
+    ]
+}

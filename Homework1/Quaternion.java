@@ -21,24 +21,24 @@ public record Quaternion(double a,double b,double c,double d){
     Quaternion times(Quaternion q){
         return new Quaternion(
             (a*q.a - b*q.b - c*q.c - d*q.d),
-            (a*q.b + b*q.a + c*q.d - d*q.c),
-            (a*q.c - b*q.d +c*q.a + d*q.b),
-            (a*q.d + b*q.c - c*q.b + d*q.a)
-        );
+            (b*q.a + a*q.b - d*q.c + c*q.d),
+            (c*q.a + d*q.b + a*q.c - b*q.d),
+            (d*q.a - c*q.b + b*q.c + a*q.d));
+    }
+    private Quaternion times(double k){
+        return new Quaternion(k*a, k*b, k*c, k*d); 
     }
     double norm(){ 
         return Math.sqrt(a*a + b*b + c*c + d*d);
     }
     Quaternion normalized(){
-        return new Quaternion (a/(this.norm()), b/norm(), c/norm(), d/norm());
+        return times(1 / norm()); 
     }
     Quaternion conjugate(){ //negated signs
         return new Quaternion (-a, -b, -c, -d);
     }
-    Quaternion inverse()){
-        return new Quaternion (
-            (a/(q.a*q.a)), (b/(q.b*q.b)), (c/(q.c*q.c)), (d/(q.d*q.d))
-        );
+    Quaternion inverse(){
+        return conjugate().times(1.0 / Math.pow(norm(), 2.0)); 
     }
     List<Double> coefficients(){
         return List.of(a,b,c,d);
