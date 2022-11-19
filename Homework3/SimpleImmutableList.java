@@ -80,16 +80,16 @@ final record EmptyList() implements SimpleImmutableList {
         if (n != 0) {
             throw new IllegalArgumentException();
         } else {
-            return this;
-        }
+        return this;
+    }
     }
 
     public SimpleImmutableList drop(int n) {
         if (n != 0) {
             throw new IllegalArgumentException();
         } else {
-            return this;
-        }
+        return this;
+    }
     }
 
     public SimpleImmutableList reversed() {

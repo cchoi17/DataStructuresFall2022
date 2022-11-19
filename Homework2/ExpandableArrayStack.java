@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 public class ExpandableArrayStack implements Stack {
-    private static int MINIMUM_CAPACITY = 16;
+    private static final int MINIMUM_CAPACITY = 16;
     private Object[] elements = new Object[MINIMUM_CAPACITY];
     private int size = 0;
 
@@ -37,9 +37,9 @@ public class ExpandableArrayStack implements Stack {
     }
 
     public void changeCapacity(int newSize) {
-        Object[] elements2 = new Object[newSize];
+        Object[] newElements = new Object[newSize];
         System.arraycopy(elements, 0, elements, 0, elements.length);
-        elements = elements2;
+        elements = newElements;
     }
 
     public boolean isFull() {

@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 public class ExpandableArrayQueue implements Queue {
-    private static int MINIMUM_CAPACITY = 16;
+    private static final int MINIMUM_CAPACITY = 16;
     private Object[] elements = new Object[MINIMUM_CAPACITY];
     private int size = 0;
     private int head = 0;
