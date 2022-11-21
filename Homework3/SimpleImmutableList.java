@@ -79,17 +79,15 @@ final record EmptyList() implements SimpleImmutableList {
     public SimpleImmutableList take(int n) {
         if (n != 0) {
             throw new IllegalArgumentException();
-        } else {
+        }
         return this;
-    }
     }
 
     public SimpleImmutableList drop(int n) {
         if (n != 0) {
             throw new IllegalArgumentException();
-        } else {
+        }
         return this;
-    }
     }
 
     public SimpleImmutableList reversed() {
@@ -110,7 +108,7 @@ final record EmptyList() implements SimpleImmutableList {
     }
 
     public boolean every(Predicate<Object> p) {
-        // empty list
+        // empty list, so will be true for "every element" in this list.
         return true;
     }
 
@@ -153,9 +151,8 @@ final record ListNode(Object head, SimpleImmutableList tail) implements SimpleIm
             throw new IllegalArgumentException();
         } else if (n > 0) {
             return tail.drop(n - 1);
-        } else {
-            return this;
         }
+        return this;
     }
 
     public SimpleImmutableList reversed() {
