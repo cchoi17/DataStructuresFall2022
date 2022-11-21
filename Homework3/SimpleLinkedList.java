@@ -157,13 +157,12 @@ public class SimpleLinkedList {
         if (n > size() || n < 0) {
             throw new IllegalArgumentException();
         } else if (n > 0) {
-            for (var node = header.previous; node != nodeAt(n - 1); node = node.previous) {
-                remove(node);
-            }
+            var node = nodeAt(n - 1);
+            header.previous = node;
+            node.next = header;
         } else if (n == 0) {
             size = 0;
         }
-
     }
 
     public void drop(int n) {
@@ -180,9 +179,9 @@ public class SimpleLinkedList {
     public void reverse() {
         var node = header;
         for (var i = 0; i <= size(); i++) {
-            Node temp = node.next;
+            Node oldPrevious = node.next;
             node.next = node.previous;
-            node.previous = temp;
+            node.previous = oldPrevious;
             node = node.previous;
         }
     }
