@@ -119,7 +119,5 @@ public class WordFinder{
         var words = new ArrayList<String>();
         root.accumulateWords("", words);
         return words;
-        // take a list, into tht list, keep adding words. go to root, as u go thru it, accumulate all the words you see it and
-        // drop it into words
     }
 }
